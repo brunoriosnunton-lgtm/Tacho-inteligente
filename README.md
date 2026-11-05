@@ -19,7 +19,7 @@ También puedes ejecutar `dotnet run --project TachoInteligente.csproj` desde la
 - Historial con fecha, usuario y nivel anterior. Se almacena en `App_Data/state.json`, fuera del control de versiones; conserva esa carpeta para no perder los registros.
 - El registro de limpieza actualiza el nivel a 0% y persiste tanto el estado como el historial.
 
-Los cuatro tachos iniciales son datos de demostración. No hay sensores conectados ni recepción automática de mediciones. La integración de hardware requiere definir dispositivos, protocolo y autenticación.
+El Tacho principal usa datos de demostración. Solo se muestra este tacho; al iniciar se retiran los otros tachos de estados guardados anteriormente, conservando el historial de limpieza. No hay sensores conectados ni recepción automática de mediciones. La integración de hardware requiere definir dispositivos, protocolo y autenticación.
 
 ## Credenciales
 

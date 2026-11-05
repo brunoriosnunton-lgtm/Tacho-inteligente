@@ -18,8 +18,9 @@ var gate = new object();
 var directory = Path.Combine(app.Environment.ContentRootPath, "App_Data");
 Directory.CreateDirectory(directory);
 var file = Path.Combine(directory, "state.json");
-var state = File.Exists(file) ? JsonSerializer.Deserialize<Storage>(File.ReadAllText(file))! : new Storage { Bins = [new(1,"Tacho principal","Entrada principal",92),new(2,"Punto ecológico","Patio central",76),new(3,"Tacho cafetería","Cafetería",43),new(4,"Zona administrativa","Oficinas",8)] };
+var state = File.Exists(file) ? JsonSerializer.Deserialize<Storage>(File.ReadAllText(file))! : new Storage { Bins = [new(1,"Tacho principal","Entrada principal",92)] };
 void Save() { var temp = file + ".tmp"; File.WriteAllText(temp,JsonSerializer.Serialize(state)); File.Move(temp,file,true); }
+if (state.Bins.RemoveAll(bin => bin.Id != 1) > 0) Save();
 bool Equal(string a,string b) => CryptographicOperations.FixedTimeEquals(SHA256.HashData(Encoding.UTF8.GetBytes(a)),SHA256.HashData(Encoding.UTF8.GetBytes(b)));
 app.MapPost("/api/login",async (Login input,HttpContext ctx) => {
  var password = builder.Configuration["ADMIN_PASSWORD"] ?? (app.Environment.IsDevelopment() ? "Admin123!" : null);
