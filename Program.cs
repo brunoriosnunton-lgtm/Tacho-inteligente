@@ -23,9 +23,9 @@ void Save() { var temp = file + ".tmp"; File.WriteAllText(temp,JsonSerializer.Se
 if (state.Bins.RemoveAll(bin => bin.Id != 1) > 0) Save();
 bool Equal(string a,string b) => CryptographicOperations.FixedTimeEquals(SHA256.HashData(Encoding.UTF8.GetBytes(a)),SHA256.HashData(Encoding.UTF8.GetBytes(b)));
 app.MapPost("/api/login",async (Login input,HttpContext ctx) => {
- var password = builder.Configuration["ADMIN_PASSWORD"] ?? (app.Environment.IsDevelopment() ? "Admin123!" : null);
+ var password = builder.Configuration["ADMIN_PASSWORD"] ?? (app.Environment.IsDevelopment() ? "1234" : null);
  if(password is null) return Results.Problem("Configura ADMIN_PASSWORD para iniciar sesión.",statusCode:503);
- if(!Equal(input.User ?? "",builder.Configuration["ADMIN_USER"] ?? "admin") || !Equal(input.Password ?? "",password)) return Results.Unauthorized();
+ if(!Equal(input.User ?? "",builder.Configuration["ADMIN_USER"] ?? "ADMIN") || !Equal(input.Password ?? "",password)) return Results.Unauthorized();
  await ctx.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity([new Claim(ClaimTypes.Name,input.User!)],CookieAuthenticationDefaults.AuthenticationScheme))); return Results.Ok();
 }).RequireRateLimiting("login");
 app.MapPost("/api/logout",async (HttpContext c) => { await c.SignOutAsync(); return Results.Ok(); }).RequireAuthorization();

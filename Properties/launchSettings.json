@@ -1,1 +1,1 @@
-{"profiles":{"TachoInteligente":{"commandName":"Project","launchBrowser":true,"applicationUrl":"http://localhost:5080","environmentVariables":{"ASPNETCORE_ENVIRONMENT":"Development"}}}}
+{"profiles":{"TachoInteligente":{"commandName":"Project","launchBrowser":true,"applicationUrl":"http://localhost:5081","environmentVariables":{"ASPNETCORE_ENVIRONMENT":"Development"}}}}
